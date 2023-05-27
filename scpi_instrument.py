@@ -48,6 +48,7 @@
 # standard imports
 import os
 import sys
+import copy
 import serial
 import re
 from enum import Enum
@@ -58,7 +59,7 @@ from aenum import MultiValueEnum
 # logging.basicConfig( level = logging.DEBUG )
 
 # SCPI imports
-import visa
+import pyvisa as visa
 
 
 # In[2]:
@@ -238,12 +239,13 @@ class SCPI_Instrument():
             self.disconnect()
             
         self.__port = port
+        r_port = copy.deepcopy(port)
         
         # TODO: Make backend support more robust
         if port is not None:
             # adjust port name for resource id to match backend
             if self.__backend == '@py':
-                if 'COM' not in port:
+                if 'COM' not in port and sys.platform not in ['darwin', 'win32', 'linux']:
                     r_port = 'COM' + port
                 
             else:
