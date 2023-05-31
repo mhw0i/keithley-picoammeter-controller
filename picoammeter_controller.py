@@ -74,7 +74,7 @@ log.basicConfig( level = log.DEBUG )
 
 # SCPI imports
 import instrument_controller as ic
-import visa
+import pyvisa as visa
 
 
 # In[2]:
