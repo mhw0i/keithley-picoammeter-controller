@@ -57,7 +57,7 @@ from aenum import MultiValueEnum
 # logging.basicConfig( level = logging.DEBUG )
 
 # SCPI imports
-import visa
+import pyvisa as visa
 
 
 # In[2]:
